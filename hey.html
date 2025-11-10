@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Purva - A Special Message</title>
+    <style>
+        /* CSS for Styling and Animation */
+        body {
+            /* Smooth gradient background for a romantic feel */
+            background: linear-gradient(135deg, #1f0101, #3a000c);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Hide overflowing hearts */
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            /* Max width prevents stretching too wide on large screens */
+            max-width: 90%; 
+            width: 500px; /* Base width for laptop/desktop view */
+            box-sizing: border-box; /* Include padding in the element's total width/height */
+            background: rgba(0, 0, 0, 0.4); /* Semi-transparent background for the text box */
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.8); /* Glow effect */
+            z-index: 10; /* Keep content on top of hearts */
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Keyframes for text container fade-in */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            color: #ff0055;
+            font-size: 3em; /* Base size for desktop */
+            margin-bottom: 0.2em;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #ff0055;
+        }
+
+        p {
+            font-size: 1.4em; /* Base size for desktop */
+            margin: 15px 0;
+        }
+
+        .highlight {
+            color: #ffcc00; /* Gold color for emphasis */
+            font-weight: bold;
+        }
+
+        /* Heart Animation CSS */
+        .heart {
+            position: absolute;
+            bottom: -50px; /* Start below the screen */
+            font-size: 2em;
+            color: #ff0055;
+            pointer-events: none; /* Ignore mouse events */
+            animation: floatUp 8s linear infinite;
+            opacity: 0;
+            text-shadow: 0 0 5px rgba(255, 0, 85, 0.8);
+        }
+
+        /* Keyframes for heart floating animation */
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            5% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- MEDIA QUERIES FOR MOBILE/SMALL SCREENS --- */
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px; /* Reduced padding for mobile */
+                max-width: 95%;
+            }
+
+            h1 {
+                font-size: 2em; /* Smaller title on mobile */
+            }
+
+            p {
+                font-size: 1.1em; /* Smaller paragraph text on mobile */
+                margin: 10px 0;
+            }
+
+            .heart {
+                font-size: 1.5em; /* Slightly smaller hearts on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>For My Purva ❤️</h1>
+        <p>
+            You are the <span class="highlight">most beautiful</span>, <span class="highlight">caring</span>, and <span class="highlight">wonderful</span> part of my life.
+        </p>
+        <p>
+            Every moment with you feels like a dream I never want to wake up from.
+        </p>
+        <p>
+            **I love you so much more than anything.** You are my forever.
+        </p>
+        <p style="margin-top: 30px;">
+            — Always yours.
+        </p>
+    </div>
+
+    <script>
+        const body = document.querySelector('body');
+
+        // Function to create a single heart element
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖'; // Heart emoji
+
+            // Randomize starting position (x-axis) using viewport width (vw)
+            heart.style.left = Math.random() * 100 + 'vw';
+
+            // Randomize size slightly
+            // Sizes are now responsive thanks to the media query affecting .heart font-size
+            heart.style.fontSize = Math.random() * 1.5 + 1.5 + 'em'; 
+
+            // Randomize animation duration for a scattered look
+            heart.style.animationDuration = Math.random() * 5 + 7 + 's';
+
+            // Randomize animation delay to prevent all hearts starting at once
+            heart.style.animationDelay = Math.random() * 8 + 's';
+
+            body.appendChild(heart);
+
+            // Remove heart after it floats off screen to keep the DOM clean
+            setTimeout(() => {
+                heart.remove();
+            }, 8000); // Must match or exceed the animation duration
+        }
+
+        // Continuously create hearts every 300 milliseconds
+        setInterval(createHeart, 300);
+
+        // Create an initial burst of hearts for immediate effect
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createHeart, i * 150);
+        }
+    </script>
+</body>
+</html>
